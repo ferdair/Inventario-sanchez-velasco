@@ -3,19 +3,17 @@ package com.sanchez.inventario.models.entities;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 @Entity  
-@Table(name="inventarios")
-public class Inventario implements Serializable{
+@Table(name="menu_producto")
+public class MenuProducto implements Serializable{
 
 	/**
 	 * 
@@ -25,19 +23,25 @@ public class Inventario implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name="pk_inventario")	
+	@Column(name="pk_menu_producto")	
 	private Long id;
-	@Column(name="cantidad")	
-	private int cantidad;
-	 @OneToOne(cascade = CascadeType.ALL)
+	
+	 @ManyToOne
+	 @JoinColumn(name = "fk_menu")
+	 private Menu menu;
+	 
+	 @ManyToOne
 	 @JoinColumn(name = "fk_producto")
-	private Producto producto;
-	
-	
-	public Inventario() {
+	 private Producto producto;
+	 
+	 @Column(name="cantidad_producto")
+	 private int cantidadProducto;
+	 
+	 
+	public MenuProducto() {
 		super();
 	}
-	public Inventario(Long id) {
+	public MenuProducto(Long id) {
 		super();
 		this.id = id;
 	}
@@ -47,11 +51,11 @@ public class Inventario implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getCantidad() {
-		return cantidad;
+	public Menu getMenu() {
+		return menu;
 	}
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
 	public Producto getProducto() {
 		return producto;
@@ -59,8 +63,17 @@ public class Inventario implements Serializable{
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-	
-	
+	public int getCantidadProducto() {
+		return cantidadProducto;
+	}
+	public void setCantidadProducto(int cantidadProducto) {
+		this.cantidadProducto = cantidadProducto;
+	}
+	 
+	 
+	 
+	 
+	 
 	
 	
 

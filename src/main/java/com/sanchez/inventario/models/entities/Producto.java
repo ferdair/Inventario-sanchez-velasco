@@ -1,7 +1,7 @@
 package com.sanchez.inventario.models.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -10,9 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity  
@@ -39,14 +39,15 @@ public class Producto implements Serializable {
 	@Column(name="cantidad_disponible")
 	private Long cantidadDisponible;
 
-	@ManyToMany
-	@JoinTable(name = "menus_productos",joinColumns = @JoinColumn(name="pk_producto"),
-	inverseJoinColumns = @JoinColumn(name="pk_menu"))
-	private List<Menu>menu;
+	@OneToMany(mappedBy = "producto")
+	private Set<MenuProducto>menus;
 	
 	@JoinColumn(name="fk_proveedor", referencedColumnName="pk_proveedor")
 	@ManyToOne
 	private Proveedor proveedor;
+	
+	@OneToOne(mappedBy = "producto")
+    private Inventario inventario;
 
 	public Producto() {
 		super();
@@ -81,12 +82,23 @@ public class Producto implements Serializable {
 		this.cantidadDisponible = cantidadDisponible;
 	}
 
-	public List<Menu> getMenu() {
-		return menu;
+
+
+
+	public Set<MenuProducto> getMenus() {
+		return menus;
 	}
 
-	public void setMenu(List<Menu> menu) {
-		this.menu = menu;
+	public void setMenus(Set<MenuProducto> menus) {
+		this.menus = menus;
+	}
+
+	public Inventario getInventario() {
+		return inventario;
+	}
+
+	public void setInventario(Inventario inventario) {
+		this.inventario = inventario;
 	}
 
 	public Proveedor getProveedor() {

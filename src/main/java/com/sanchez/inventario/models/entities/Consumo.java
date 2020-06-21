@@ -2,7 +2,7 @@ package com.sanchez.inventario.models.entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -11,8 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -37,12 +37,14 @@ public class Consumo implements Serializable{
 	@Column(name="fecha")
 	private Calendar fecha;
 	
-	@ManyToMany(mappedBy = "consumos")
-	private List<Menu> menus;
+	
+	@OneToMany(mappedBy = "consumo")
+	private Set<ConsumoMenu> menus;
 	
 	@JoinColumn(name="fk_usuario", referencedColumnName="pk_usuario")
 	@ManyToOne
 	private Usuario usuario;
+	
 
 	public Consumo() {
 		super();
@@ -69,11 +71,13 @@ public class Consumo implements Serializable{
 		this.fecha = fecha;
 	}
 
-	public List<Menu> getMenus() {
+	
+
+	public Set<ConsumoMenu> getMenus() {
 		return menus;
 	}
 
-	public void setMenus(List<Menu> menus) {
+	public void setMenus(Set<ConsumoMenu> menus) {
 		this.menus = menus;
 	}
 
