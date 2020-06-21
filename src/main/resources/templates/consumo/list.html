@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: frgHead"></head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
+  <!-- ======= Header ======= -->
+    <header th:replace="layout :: frgSideBar"></header>
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 th:text="${title}"></h2>
+          <ol>
+            <li><a th:href="@{/index.html}">Home</a></li>
+            <li th:text="${title}"></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+      <div class="container">
+        <table class="table table-hover">
+			<thead>
+				<tr>
+				<th>Fecha</th>
+				<th>Usuario</th>
+				
+				<th><a class="btn btn-sm btn-success"
+					th:href="@{/consumo/create}">&nbsp;Nuevo</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="a : ${consumo}">
+					<td th:text="${a.fecha}"></td>
+					<td th:text="${a.usuario}"></td>
+					
+					<td><a class="btn btn-sm btn-warning"
+					th:href="@{/consumo/update/} + ${a.id}">&nbsp;Actualizar</a>
+									<a class="btn btn-sm btn-info"
+									th:href="@{/consumo/retrieve/} + ${a.id}">&nbsp;Consultar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+        
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer th:replace="layout :: frgFooter"></footer>
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+   <!-- Vendor JS Files -->
+   
+  
+  
+</body>
+
+</html>
