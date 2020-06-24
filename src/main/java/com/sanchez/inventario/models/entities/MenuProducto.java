@@ -24,7 +24,7 @@ public class MenuProducto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name="pk_menu_producto")	
-	private Long id;
+	private Integer id;
 	
 	 @ManyToOne
 	 @JoinColumn(name = "fk_menu")
@@ -41,14 +41,14 @@ public class MenuProducto implements Serializable{
 	public MenuProducto() {
 		super();
 	}
-	public MenuProducto(Long id) {
+	public MenuProducto(Integer id) {
 		super();
 		this.id = id;
 	}
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Menu getMenu() {
@@ -69,7 +69,13 @@ public class MenuProducto implements Serializable{
 	public void setCantidadProducto(int cantidadProducto) {
 		this.cantidadProducto = cantidadProducto;
 	}
+	@Override
+	public String toString() {
+		return this.getMenu()+"--"+this.getProducto();
+	}
 	 
+	
+	
 	 
 	 
 	 

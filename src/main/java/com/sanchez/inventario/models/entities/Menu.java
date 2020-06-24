@@ -82,6 +82,12 @@ public class Menu implements Serializable{
 		this.consumos = consumos;
 	}
 
+	@Override
+	public String toString() {
+		return this.getNombre()+"";
+	}
+
+	
 	
 
 

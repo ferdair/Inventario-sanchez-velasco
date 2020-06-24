@@ -1,6 +1,7 @@
 package com.sanchez.inventario.models.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Set;
 
@@ -14,6 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity  
@@ -29,11 +34,13 @@ public class Consumo implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name="pk_consumo")	
-	private Long id;
+	private Integer id;
 	
 	//@Column(name="cantidad")
 	//private Long cantidad;
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="fecha")
 	private Calendar fecha;
 	
@@ -50,16 +57,16 @@ public class Consumo implements Serializable{
 		super();
 	}
 
-	public Consumo(Long id) {
+	public Consumo(Integer id) {
 		super();
 		this.id = id;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -88,6 +95,18 @@ public class Consumo implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	public String fechaNac() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");		
+		return sdf.format(fecha.getTime());
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.fechaNac()+"-"+this.getUsuario();
+	}
+	
 	
 	
 	

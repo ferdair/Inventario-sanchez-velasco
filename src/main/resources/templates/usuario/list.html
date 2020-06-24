@@ -32,22 +32,29 @@
         <table class="table table-hover">
 			<thead>
 				<tr>
-				<th>Fecha</th>
-				<th>Usuario</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Contrato</th>
+				<th>Rol</th>
+				<th>Email</th>
 				
 				<th><a class="btn btn-sm btn-success"
-					th:href="@{/consumo/create}">&nbsp;Nuevo</a></th>
+					th:href="@{/usuario/create}">&nbsp;Nuevo</a></th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="a : ${consumo}">
-					<td th:text="${a.fecha}"></td>
-					<td th:text="${a.usuario}"></td>
+				<tr th:each="a : ${usuarios}">
+					<td th:text="${a.nombre}"></td>
+					<td th:text="${a.apellido}"></td>
+					<td th:text="${a.contrato}"></td>
+					<td th:text="${a.rol}"></td>
+					<td th:text="${a.email}"></td>
+					
 					
 					<td><a class="btn btn-sm btn-warning"
-					th:href="@{/consumo/update/} + ${a.id}">&nbsp;Actualizar</a>
+					th:href="@{/usuario/update/} + ${a.id}">&nbsp;Actualizar</a>
 									<a class="btn btn-sm btn-info"
-									th:href="@{/consumo/retrieve/} + ${a.id}">&nbsp;Consultar</a>
+									th:href="@{/usuario/retrieve/} + ${a.id}">&nbsp;Consultar</a>
 								</td>
 							</tr>
 						</tbody>

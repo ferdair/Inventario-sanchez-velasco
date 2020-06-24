@@ -40,8 +40,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="a : ${consumo}">
-					<td th:text="${a.fecha}"></td>
+				<tr th:each="a : ${consumos}">
+					<td th:text="${a.fechaNac()}"></td>
 					<td th:text="${a.usuario}"></td>
 					
 					<td><a class="btn btn-sm btn-warning"

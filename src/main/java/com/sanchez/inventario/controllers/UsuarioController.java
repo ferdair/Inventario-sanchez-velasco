@@ -55,7 +55,7 @@ public class UsuarioController {
 		List<Usuario> usuarios = srvUsuario.findAll();
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("title", "Listado de Usuarios");
-		return "usuarios/list";
+		return "usuario/list";
 	}
 	
 	

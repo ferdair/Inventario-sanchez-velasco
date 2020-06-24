@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: frgHead"></head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
+  <!-- ======= Header ======= -->
+    <header th:replace="layout :: frgSideBar"></header>
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 th:text="${title}"></h2>
+          <ol>
+            <li><a th:href="@{/index.html}">Menu Producto</a></li>
+            <li th:text="${title}"></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+      <div class="container">
+        
+        <div class="card o-hidden border-0 shadow-lg my-5">
+							<div class="card-body p-0">
+								<!-- Nested Row within Card Body -->
+								<div class="row">
+									<div class="col-lg-7">
+										<div class="p-5">
+											<div class="text-center">
+												<h1 th:text="${title}" class="h4 text-gray-900 mb-4"></h1>
+											</div>
+											<form class="user" th:action="@{/menu_producto/save}"
+												th:object="${menu_producto}" method="post">
+												<hr>
+												
+												<div class="col-sm-6 mb-3 mb-sm-0">
+										
+													<h5>Producto</h5>
+														<select class="form-control" th:field=*{producto.id}>
+															<option value=0>-- Seleccione --</option>
+															<option th:each="u : ${productos}"
+																th:value="${u.id}"
+																th:text="${u}"
+															></option>
+														</select>
+													</div>
+											
+												<div class="col-sm-6 mb-3 mb-sm-0">
+													<h5>Menu</h5>
+														<select class="form-control" th:field=*{menu.id}>
+															<option value=0>-- Seleccione --</option>
+															<option th:each="u : ${menus}"
+																th:value="${u.id}"
+																th:text="${u}"
+															></option>
+														</select>
+													</div>
+												 
+												 
+												
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<input type="number" class="form-control form-control-user"
+															th:field="*{cantidadProducto}" placeholder="Cantidad de Producto" >
+													</div>
+												
+												 
+												
+												
+																							<hr>
+												<div class="form-group row">
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<input type="submit"
+															class="btn btn-success btn-user btn-block"
+															value="Guardar" />
+													</div>
+													<div class="col-sm-6 mb-3 mb-sm-0">
+														<a th:href="@{/menu_producto/list}"
+															class="btn btn-danger btn-user btn-block">Cancelar</a>
+													</div>
+												</div>
+												
+												<input type="hidden" th:field="*{id}" />
+
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+        
+        
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer th:replace="layout :: frgFooter"></footer>
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+   <!-- Vendor JS Files -->
+   
+  
+  
+</body>
+
+</html>

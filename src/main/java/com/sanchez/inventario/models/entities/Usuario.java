@@ -27,7 +27,7 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name="pk_usuario")	
-	private Long id;
+	private Integer id;
 	
 	@Column(name="nombre")
 	private String nombre;
@@ -52,16 +52,16 @@ public class Usuario implements Serializable{
 		super();
 	}
 
-	public Usuario(Long id) {
+	public Usuario(Integer id) {
 		super();
 		this.id = id;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -112,6 +112,17 @@ public class Usuario implements Serializable{
 	public void setConsumos(List<Consumo> consumos) {
 		this.consumos = consumos;
 	}
+	
+	
+
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getNombre()+" - "+this.getRol();
+	}
+	
+	
 	
 	
 
