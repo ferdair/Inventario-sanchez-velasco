@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="frgHead">
 	<meta charset="utf-8">
   	<meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -25,6 +25,9 @@
   <!-- Template Main CSS File -->
   	<link th:href="@{/assets/css/style.css}" rel="stylesheet">
   	
+  	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  	
+  	
 </head>
 <body>
 	<!-- ======= Mobile nav toggle button ======= -->
@@ -35,7 +38,19 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <h1 class="text-light"><a th:href="@{/index.html}">Usuario</a></h1>
+        <h1 class="text-light"><a th:href="@{/index.html}">
+        <div class="login-content" sec:authorize="isAuthenticated()">
+								<i class="fas fa-user"></i>&nbsp;<a href="#"><span
+									sec:authentication="name"></span></a>
+								<div sec:authorize="isAuthenticated()">
+									<form id="frmLogout" th:action="@{/logout}" method="post">
+										<i class="fas fa-sign-out-alt"></i>&nbsp;<a href="#"
+											onclick="document.getElementById('frmLogout').submit();">Salir</a>
+										<input type="hidden" th:name="${_csrf.parameterName}"
+											th:value="${_csrf.token}" />
+									</form>
+								</div>
+							</div></a></h1>
       </div>
 
       <nav class="nav-menu">
@@ -60,7 +75,9 @@
 
   <!-- ======= Footer ======= -->
   <footer th:fragment="frgFooter" id="footer">
+  
     <div class="container">
+    
       <div class="copyright">
         &copy; Copyright <strong><span>iPortfolio</span></strong>
       </div>

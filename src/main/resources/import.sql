@@ -24,7 +24,3 @@ INSERT INTO menus(pk_menu, nombre)values(3,'Hamburgesa Triple');
 INSERT INTO menus(pk_menu, nombre)values(4,'Alitas BBQ');
 INSERT INTO menus(pk_menu, nombre)values(5,'Pollo Familiar');
 
-INSERT INTO usuarios(pk_usuario,nombre,apellido,contrato,rol,email)values(1,'Juan','Velasco','Tiempo Completo','Administrador','jcvelasco@espe.edu.ec');
-INSERT INTO usuarios(pk_usuario,nombre,apellido,contrato,rol,email)values(2,'Dair','Sanchez','Medio Tiempo','Lider Conteo','fdsanchez@espe.edu.ec');
-
-

@@ -2,6 +2,7 @@ package com.sanchez.inventario.models.services;
 
 import java.util.List;
 
+
 import com.sanchez.inventario.models.entities.Usuario;
 
 public interface IUsuarioService {
