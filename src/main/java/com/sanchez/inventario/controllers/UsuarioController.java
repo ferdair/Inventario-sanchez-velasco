@@ -82,10 +82,14 @@ public class UsuarioController {
 				return "usuario/form";
 			}			
 			String pass = usuario.getPassword();
-			usuario.setPassword(encoder.encode(pass));			
-			usuario.getRoles().add(new Rol("ROLE_USER"));
-			usuario.getRoles().add(new Rol("ROLE_ADMIN"));
-
+			usuario.setPassword(encoder.encode(pass));		
+			
+			//for (String string : roleStrings) {
+				//usuario.setRoles(null);
+				//usuario.getRoles().add(new Rol(string));
+			//}
+			
+			
 			usuario.setHabilitado(true);
 			service.save(usuario);
 			flash.addFlashAttribute("success", "El usuario fue agregado con éxito.");

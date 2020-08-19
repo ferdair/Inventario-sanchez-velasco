@@ -22,16 +22,13 @@ public class ProductoController {
 	@Autowired 
 	private IProductoService srvProducto;
 
-	@Autowired 
-	private IProveedorService srvProveedor;
+
 	
 	@GetMapping(value="/create") //https://localhost:8080/alumno/create
 	public String create(Model model) {
 		Producto producto = new Producto();
 		model.addAttribute("title", "Registro de nuevo Producto");
 		model.addAttribute("producto", producto); //similar al ViewBag
-		List<Proveedor> proveedores=srvProveedor.findAll();
-		model.addAttribute("proveedores", proveedores);
 		return "producto/form"; //la ubicación de la vista
 	}
 	
@@ -47,9 +44,7 @@ public class ProductoController {
 		Producto producto = srvProducto.findById(id);
 		model.addAttribute("producto", producto);
 		model.addAttribute("title", "Actualizando el registro de " + producto);
-		List<Proveedor> proveedores=srvProveedor.findAll();
-		model.addAttribute("proveedores", proveedores);
-		return "producto/form";
+				return "producto/form";
 	}
 	
 	@GetMapping(value="/delete/{id}")

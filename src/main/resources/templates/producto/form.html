@@ -19,7 +19,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2 th:text="${title}"></h2>
           <ol>
-            <li><a th:href="@{/index.html}">Usuario</a></li>
+            <li><a th:href="@{/index.html}">Home</a></li>
             <li th:text="${title}"></li>
           </ol>
         </div>
@@ -39,63 +39,20 @@
 											<div class="text-center">
 												<h1 th:text="${title}" class="h4 text-gray-900 mb-4"></h1>
 											</div>
-											<form class="user" th:action="@{/usuario/save}"
-												th:object="${usuario}" method="post">
+											<form class="user" th:action="@{/producto/save}"
+												th:object="${producto}" method="post">
 												<hr>
-												
 												<div class="form-group row">
 													<div class="col-sm-6 mb-3 mb-sm-0">
 														<input type="text" class="form-control form-control-user"
 															th:field="*{nombre}" placeholder="Nombre">
-												</div>
-												</div>
-												<div class="form-group row">
+													</div>
 													<div class="col-sm-6 mb-3 mb-sm-0">
-														<input type="text" class="form-control form-control-user"
-															th:field="*{apellido}" placeholder="Apellido">
-												</div>
-												</div>
-											
-												<div class="form-group row">
-													<div class="col-sm-6 mb-3 mb-sm-0">
-														<input type="text" class="form-control form-control-user"
-															th:field="*{contrato}" placeholder="Contrato">
-												</div>
-												</div>
-												
-												<div class="form-group row">
-													<div class="col-sm-6 mb-3 mb-sm-0">													
-														&nbsp;&nbsp;<label class="radio-inline"><input type="checkbox" th:field="*{roles}" value="ROLE_USER" />&nbsp;&nbsp;Usuario</label>
-														&nbsp;&nbsp;&nbsp;&nbsp;<label class="radio-inline"><input type="checkbox" th:field="*{roles}" value="ROLE_ADMIN" />&nbsp;&nbsp;Administrador</label>
+													<input type="number" min="1" class="form-control form-control-user"
+															th:field="*{cantidadDisponible}" placeholder="Cantidad">
 													</div>
 												</div>
-												
-												
-												<div class="form-group row">
-													<div class="col-sm-6 mb-3 mb-sm-0">
-														<input type="email" class="form-control form-control-user"
-															th:field="*{email}" placeholder="Email">
-												</div>
-												
-												
-											
-											</div>
-											
-											<div class="form-group row">
-													<div class="col-sm-6 mb-3 mb-sm-0">
-														<input type="text" class="form-control form-control-user"
-															th:field="*{user}" placeholder="Usuario">
-												</div>
-												</div>
-												
-												<div class="form-group row">
-													<div class="col-sm-6 mb-3 mb-sm-0">
-														<input type="password" class="form-control form-control-user"
-															th:field="*{password}" >
-												</div>
-												</div>
-												
-																							<hr>
+												<hr>
 												<div class="form-group row">
 													<div class="col-sm-6 mb-3 mb-sm-0">
 														<input type="submit"
@@ -103,7 +60,7 @@
 															value="Guardar" />
 													</div>
 													<div class="col-sm-6 mb-3 mb-sm-0">
-														<a th:href="@{/usuario/list}"
+														<a th:href="@{/producto/list}"
 															class="btn btn-danger btn-user btn-block">Cancelar</a>
 													</div>
 												</div>

@@ -28,7 +28,7 @@ public class Producto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name="pk_producto")	
-	private Long id;
+	private Integer id;
 	
 	@Column(name="nombre")
 	private String nombre;
@@ -37,7 +37,7 @@ public class Producto implements Serializable {
 	//private Long cantidadInicial;
 	
 	@Column(name="cantidad_disponible")
-	private Long cantidadDisponible;
+	private Integer cantidadDisponible;
 
 	@OneToMany(mappedBy = "producto")
 	private Set<MenuProducto>menus;
@@ -53,16 +53,16 @@ public class Producto implements Serializable {
 		super();
 	}
 
-	public Producto(Long id) {
+	public Producto(Integer id) {
 		super();
 		this.id = id;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -74,11 +74,11 @@ public class Producto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Long getCantidadDisponible() {
+	public Integer getCantidadDisponible() {
 		return cantidadDisponible;
 	}
 
-	public void setCantidadDisponible(Long cantidadDisponible) {
+	public void setCantidadDisponible(Integer cantidadDisponible) {
 		this.cantidadDisponible = cantidadDisponible;
 	}
 
