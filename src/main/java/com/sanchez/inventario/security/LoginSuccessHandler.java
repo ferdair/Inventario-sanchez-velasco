@@ -31,6 +31,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler  
 		Usuario usuario = srvUsuario.findByUser(authentication.getName());
 		
 		
+		
 		SessionFlashMapManager sessionFlashMapManager = new SessionFlashMapManager();
 		FlashMap flashMap = new FlashMap();
 		

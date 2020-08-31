@@ -1,7 +1,7 @@
 package com.sanchez.inventario.models.entities;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity  
@@ -40,14 +39,15 @@ public class Producto implements Serializable {
 	private Integer cantidadDisponible;
 
 	@OneToMany(mappedBy = "producto")
-	private Set<MenuProducto>menus;
+	private List<MenuProducto>menus;
 	
 	@JoinColumn(name="fk_proveedor", referencedColumnName="pk_proveedor")
 	@ManyToOne
 	private Proveedor proveedor;
 	
-	@OneToOne(mappedBy = "producto")
-    private Inventario inventario;
+	/*
+	 * @OneToOne(mappedBy = "producto") private Inventario inventario;
+	 */
 
 	public Producto() {
 		super();
@@ -85,22 +85,15 @@ public class Producto implements Serializable {
 
 
 
-	public Set<MenuProducto> getMenus() {
+	public List<MenuProducto> getMenus() {
 		return menus;
 	}
 
-	public void setMenus(Set<MenuProducto> menus) {
+	public void setMenus(List<MenuProducto> menus) {
 		this.menus = menus;
 	}
 
-	public Inventario getInventario() {
-		return inventario;
-	}
-
-	public void setInventario(Inventario inventario) {
-		this.inventario = inventario;
-	}
-
+	
 	public Proveedor getProveedor() {
 		return proveedor;
 	}
@@ -114,10 +107,5 @@ public class Producto implements Serializable {
 	public String toString() {
 		return this.getNombre()+"--"+this.getCantidadDisponible();
 	}
-	
-	
-	
-	
-	
 	
 }

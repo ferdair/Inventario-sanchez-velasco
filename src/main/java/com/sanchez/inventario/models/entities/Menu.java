@@ -1,7 +1,7 @@
 package com.sanchez.inventario.models.entities;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -26,31 +26,31 @@ public class Menu implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name="pk_menu")	
-	private Long id;
+	private Integer id;
 	
 	@Column(name="nombre")
 	private String nombre;
 	
 	@OneToMany(mappedBy = "menu")
-	private Set<MenuProducto> productos;
+	private List<MenuProducto> productos;
 	
 	@OneToMany(mappedBy = "menu")
-	private Set<ConsumoMenu> consumos;
+	private List<ConsumoMenu> consumos;
 
 	public Menu() {
 		super();
 	}
 
-	public Menu(Long id) {
+	public Menu(Integer id) {
 		super();
 		this.id = id;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -66,19 +66,19 @@ public class Menu implements Serializable{
 
 
 
-	public Set<MenuProducto> getProductos() {
+	public List<MenuProducto> getProductos() {
 		return productos;
 	}
 
-	public void setProductos(Set<MenuProducto> productos) {
+	public void setProductos(List<MenuProducto> productos) {
 		this.productos = productos;
 	}
 
-	public Set<ConsumoMenu> getConsumos() {
+	public List<ConsumoMenu> getConsumos() {
 		return consumos;
 	}
 
-	public void setConsumos(Set<ConsumoMenu> consumos) {
+	public void setConsumos(List<ConsumoMenu> consumos) {
 		this.consumos = consumos;
 	}
 
@@ -86,9 +86,5 @@ public class Menu implements Serializable{
 	public String toString() {
 		return this.getNombre()+"";
 	}
-
-	
-	
-
 
 }

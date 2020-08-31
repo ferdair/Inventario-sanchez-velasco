@@ -9,5 +9,6 @@ public interface IMenuService {
 	public Menu findById(Integer id);
 	public void delete(Integer id);
 	public List<Menu> findAll();
+	public List<Menu> findByNombre(String nombre);
 
 }

@@ -6,58 +6,38 @@
 
 
 <body>
+	<div class="card w-50 mx-auto mt-3">
+		<img th:src="@{/assets/img/bg-01.jpg}" class="card-img-top" alt="...">
+		<h3 th:text="${title}" class="text-center font-weight-bolder"></h3>
 
-						<header th:replace="layout :: frgSideBar"></header>
-						
-						  <main id="main">
-						   <section class="breadcrumbs">
-      <div class="container">
 
-        <div class="d-flex justify-content-between align-items-center">
-          <h2 th:text="${title}"></h2>
-          <ol>
-            <li><a th:href="@{/index.html}">Home</a></li>
-            <li th:text="${title}"></li>
-          </ol>
-        </div>
+		<div class="card-body">
+			<form th:action="@{/login}" method="post">
+				<div class="form-group">
+					<label for="usuario">Usuario</label> <input type="text"
+						class="form-control" name="username" id="username">
 
-      </div>
-    </section><!-- End Breadcrumbs -->
-						
-								<!-- Contact Form Area -->
-								<div class="col-12 col-lg-7">
-									<div class="contact-form-area wow fadeInUp"
-										data-wow-delay="500ms">										
-											<form th:action="@{/login}" method="post">
-												<div class="row d-flex align-items-center">
-													<div class="col-1">
-														<i class="fa fa-user fa-2x"></i>													
-													</div>
-													<div class="col-11">
-														<input type="text" class="form-control"name="username" id="username" placeholder="Usuario"/>													
-													</div>
-												</div>
-												<div class="row d-flex align-items-center">
-													<div class="col-1">
-														<i class="fas fa-key fa-2x"></i>																											
-													</div>
-													<div class="col-11">
-														<input type="password" class="form-control" name="password" id="password" placeholder="Password"/>													
-													</div>
-												</div>	
-												<div class="d-flex justify-content-center">																																
-													<button class="btn btn-sm academy-btn btn-3 btn-success" type="submit"><i class="fas fa-sign-in-alt"></i> &nbsp;Ingresar</button>
-													<button class="btn btn-sm academy-btn btn-2 ml-2" type="reset"><i class="fas fa-times"></i> &nbsp;Cancelar</button>
-												</div>												
-												<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-											</form>										
-									</div>
-								</div>
-								</main>
-					  <footer th:replace="layout :: frgFooter"></footer>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Contraseña</label> <input
+						type="password" class="form-control" name="password" id="password">
+				</div>
 
-  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-   <!-- Vendor JS Files -->
+				<button class="btn btn-sm academy-btn btn-3 btn-success"
+					type="submit">
+					<i class="fas fa-sign-in-alt"></i> &nbsp;Ingresar
+				</button>
+				<button class="btn btn-sm academy-btn btn-2 ml-2" type="reset">
+					<i class="fas fa-times"></i> &nbsp;Cancelar
+				</button>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
+				
+			</form>
+			
+		</div>
+	</div>
+	<footer th:replace="layout :: frgFooter"></footer>
 
 </body>
 

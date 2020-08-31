@@ -2,8 +2,9 @@ package com.sanchez.inventario.models.entities;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -36,8 +37,6 @@ public class Consumo implements Serializable{
 	@Column(name="pk_consumo")	
 	private Integer id;
 	
-	//@Column(name="cantidad")
-	//private Long cantidad;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -46,7 +45,7 @@ public class Consumo implements Serializable{
 	
 	
 	@OneToMany(mappedBy = "consumo")
-	private Set<ConsumoMenu> menus;
+	private List<ConsumoMenu> menus =new ArrayList<ConsumoMenu>();
 	
 	@JoinColumn(name="fk_usuario", referencedColumnName="pk_usuario")
 	@ManyToOne
@@ -80,11 +79,12 @@ public class Consumo implements Serializable{
 
 	
 
-	public Set<ConsumoMenu> getMenus() {
+
+	public List<ConsumoMenu> getMenus() {
 		return menus;
 	}
 
-	public void setMenus(Set<ConsumoMenu> menus) {
+	public void setMenus(List<ConsumoMenu> menus) {
 		this.menus = menus;
 	}
 

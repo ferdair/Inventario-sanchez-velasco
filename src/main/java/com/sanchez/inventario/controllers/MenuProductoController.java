@@ -42,8 +42,7 @@ public class MenuProductoController {
 		List<Producto> productos = srvProducto.findAll();
 		model.addAttribute("productos", productos);
 		
-		List<Menu> menus=srvMenu.findAll();
-		model.addAttribute("menus", menus);
+		
 		return "menu_producto/form"; //la ubicación de la vista
 	}
 	

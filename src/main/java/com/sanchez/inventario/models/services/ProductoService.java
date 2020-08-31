@@ -39,6 +39,12 @@ public class ProductoService implements IProductoService{
 		return (List<Producto>) dao.findAll();
 	}
 
+	
+	@Override
+	@Transactional
+	public List<Producto> findByNombre(String nombre) {		
+		return dao.findByNombreStartingWith(nombre);
+	}
 
 
 }

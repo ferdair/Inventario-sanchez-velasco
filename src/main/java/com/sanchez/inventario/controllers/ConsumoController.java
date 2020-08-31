@@ -2,15 +2,23 @@ package com.sanchez.inventario.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sanchez.inventario.models.entities.Consumo;
+import com.sanchez.inventario.models.entities.ConsumoMenu;
 import com.sanchez.inventario.models.entities.Menu;
 import com.sanchez.inventario.models.entities.Usuario;
 import com.sanchez.inventario.models.services.IConsumoService;
@@ -19,6 +27,7 @@ import com.sanchez.inventario.models.services.IUsuarioService;
 
 
 @Controller
+@SessionAttributes("consumo")
 @RequestMapping(value="/consumo")  
 public class ConsumoController {
 	
@@ -49,7 +58,9 @@ public class ConsumoController {
 	@GetMapping(value="/retrieve/{id}")
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		Consumo consumo = srConsumo.findById(id);
-		model.addAttribute("consumo", consumo);				
+		model.addAttribute("consumo", consumo);	
+		model.addAttribute("title", "Consulta de Consumo");
+
 		return "consumo/card";
 	}
 	
@@ -86,7 +97,33 @@ public class ConsumoController {
 		return "redirect:/consumo/list";
 	}
 	
+	@PostMapping(value = "/add", produces = "application/json")
+	public @ResponseBody Object add(@RequestBody @Valid ConsumoMenu consumoMenu, BindingResult result, Model model, HttpSession session) {
+
+		try {
+			Menu menu = srvMenu.findById(consumoMenu.getMenuid());
+			consumoMenu.setMenu(menu);
+
+			Consumo consumo= (Consumo)session.getAttribute("consumo");
+			consumo.getMenus().add(consumoMenu);
+
+			return consumoMenu;
+		} catch (Exception e) {
+			return e;
+		}
+	}
 	
+	@GetMapping(value = "/menues")
+	public String menues(Model model, HttpSession session) {
+		
+		
+		
+		Consumo consumo= (Consumo)session.getAttribute("consumo");
+		model.addAttribute("consumos_menu", consumo.getMenus());
+
+		model.addAttribute("title", "Listado de Menús en el Consumo");
+		return "consumo_menu/list";
+	}
 	
 
 

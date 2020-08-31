@@ -4,30 +4,11 @@
 <head th:replace="layout :: frgHead"></head>
 
 <body>
+<div class="page-wrapper default-theme sidebar-bg bg1 toggled">
+		<nav th:replace="layout :: frgSideBar"></nav>
+		<main class="page-content pt-2 ">
+			<h4 class="m-3" th:text="${title}"></h4>
 
-  <!-- ======= Mobile nav toggle button ======= -->
-  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
-
-  <!-- ======= Header ======= -->
-    <header th:replace="layout :: frgSideBar"></header>
-  <main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2 th:text="${title}"></h2>
-          <ol>
-            <li><a th:href="@{/index.html}">Home</a></li>
-            <li th:text="${title}"></li>
-          </ol>
-        </div>
-
-      </div>
-    </section><!-- End Breadcrumbs -->
-
-    <section class="inner-page">
       <div class="container">
         <table class="table table-hover">
 			<thead>
@@ -35,8 +16,9 @@
 				<th>Fecha</th>
 				<th>Usuario</th>
 				
-				<th><a class="btn btn-sm btn-success"
-					th:href="@{/consumo/create}">&nbsp;Nuevo</a></th>
+				<th><a class="btn btn-sm ml-2 btn-success"
+					th:href="@{/consumo/create}"><i
+									class="fas fa-plus"></i>&nbsp;Nuevo</a></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,11 +26,11 @@
 					<td th:text="${a.fechaNac()}"></td>
 					<td th:text="${a.usuario}"></td>
 					
-					<td><a class="btn btn-sm btn-warning"
-					th:href="@{/consumo/update/} + ${a.id}">&nbsp;Actualizar</a>
-									<a class="btn btn-sm btn-info"
-									th:href="@{/consumo/retrieve/} + ${a.id}">&nbsp;Consultar</a>
-								</td>
+					<td><a class="btn btn-sm ml-2 btn-warning"
+								th:href="@{/consumo/update/} + ${a.id}"><i class="fas fa-pen"></i>
+									&nbsp;Actualizar</a> <a class="btn btn-sm ml-2 btn-info"
+								th:href="@{/consumo/retrieve/} + ${a.id}"><i
+									class="fas fa-info"></i>&nbsp;Consultar</a></td>
 							</tr>
 						</tbody>
 					</table>

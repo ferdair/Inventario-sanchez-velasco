@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 @Entity  
 @Table(name="consumo_menu")
 public class ConsumoMenu implements Serializable{
@@ -87,7 +89,31 @@ public class ConsumoMenu implements Serializable{
 	}
 	
 	 
-	 
+	 //trasient
+	@Transient
+	private int consumoid;
+	
+	@Transient
+	private int menuid;
+
+
+	public int getConsumoid() {
+		return consumoid;
+	}
+
+	public void setConsumoid(int consumoid) {
+		this.consumoid = consumoid;
+	}
+
+	public int getMenuid() {
+		return menuid;
+	}
+
+	public void setMenuid(int menuid) {
+		this.menuid = menuid;
+	}
+	
+	
 	 
 
 }

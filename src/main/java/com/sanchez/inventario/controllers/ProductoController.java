@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sanchez.inventario.models.entities.Producto;
-import com.sanchez.inventario.models.entities.Proveedor;
 import com.sanchez.inventario.models.services.IProductoService;
-import com.sanchez.inventario.models.services.IProveedorService;
 
 @Controller
+@SessionAttributes("producto")
 @RequestMapping(value="/producto")  
 public class ProductoController {
 	
@@ -35,6 +36,8 @@ public class ProductoController {
 	@GetMapping(value="/retrieve/{id}")
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		Producto producto = srvProducto.findById(id);
+		model.addAttribute("title", "Consulta de Producto");
+
 		model.addAttribute("producto", producto);				
 		return "producto/card";
 	}
@@ -68,6 +71,11 @@ public class ProductoController {
 		return "redirect:/producto/list";
 	}
 
-
-
+	@GetMapping(value="/search/{criteria}", produces="application/json")
+	public @ResponseBody List<Producto> search(@PathVariable(value="criteria") String criteria, 
+			Model model) {
+		List<Producto> lista = this.srvProducto.findByNombre(criteria);		
+		return lista;		
+	}
+	
 }

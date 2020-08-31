@@ -10,4 +10,7 @@ public interface IProductoService {
 	public Producto findById(Integer id);
 	public void delete(Integer id);
 	public List<Producto> findAll();
+	public List<Producto> findByNombre(String nombre);
+
+
 }

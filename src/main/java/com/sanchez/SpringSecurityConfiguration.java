@@ -40,6 +40,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			return encode.encode(password);
 		});
 		
+		
+		
 		build.inMemoryAuthentication()
 		.withUser(users.username("admin").password("12345").roles("ADMIN","USER"))
 		.withUser(users.username("usuario").password("12345").roles("USER"));
@@ -48,12 +50,9 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	}
 	
- 
-	
 	@Override //Autorization
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/","/assets/**").permitAll()
-		.antMatchers("/usuario/**").hasAnyRole("ADMIN")
+		http.authorizeRequests().antMatchers("/assets/**").permitAll()
 		
 		.anyRequest().authenticated()
 			.and().formLogin().successHandler(handler).loginPage("/login").permitAll()			
