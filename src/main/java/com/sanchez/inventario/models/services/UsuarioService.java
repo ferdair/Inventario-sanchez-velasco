@@ -25,7 +25,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService{
 		
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {		
-		Usuario usuario = dao.findByUser(username);		
+		Usuario usuario = dao.findByNombre(username);		
 		if(usuario == null) {
 			throw new UsernameNotFoundException("Usuario " + username + " no encontrado");
 		}
@@ -53,7 +53,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService{
 	
 	@Transactional	
 	public Usuario findByUser(String username){		
-		return dao.findByUser(username);
+		return dao.findByNombre(username);
 	}
 
 	@Transactional 

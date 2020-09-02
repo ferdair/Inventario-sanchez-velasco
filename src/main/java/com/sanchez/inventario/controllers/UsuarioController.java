@@ -1,6 +1,5 @@
 package com.sanchez.inventario.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sanchez.inventario.models.entities.Rol;
 import com.sanchez.inventario.models.entities.Usuario;
 import com.sanchez.inventario.models.services.IUsuarioService;
 import com.sanchez.inventario.models.services.UsuarioService;
@@ -75,6 +73,16 @@ public class UsuarioController {
 	@PostMapping(value = "/save")
 	public String save(@Validated Usuario usuario, BindingResult result, Model model, RedirectAttributes flash) {
 		try {
+			
+			String message = "Usuario agregado con exito";
+			String titulo = "Registro de un nuevo Usuario";
+			
+			if(usuario.getId()!= null) {
+				message = "Gira actualizada con exito";
+				titulo = "Actualizando Gira N°" + usuario.getId();
+			}
+			
+			
 			if (result.hasErrors()) {
 				model.addAttribute("title", "Registro de nuevo usuario");
 				model.addAttribute("usuario", usuario);
@@ -83,13 +91,6 @@ public class UsuarioController {
 			String pass = usuario.getPassword();
 			usuario.setPassword(encoder.encode(pass));
 
-			/*
-			 * for (String string : roleStrings) { System.out.print(string);
-			 * 
-			 * usuario.setRoles(null); usuario.getRoles().add(new Rol(string));
-			 * 
-			 * }
-			 */
 
 			usuario.setHabilitado(true);
 			service.save(usuario);

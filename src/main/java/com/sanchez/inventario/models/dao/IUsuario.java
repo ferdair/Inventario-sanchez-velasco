@@ -6,7 +6,7 @@ import com.sanchez.inventario.models.entities.Usuario;
 
 public interface IUsuario extends CrudRepository<Usuario, Integer>{
 	
-	public Usuario findByUser(String user);	
+	public Usuario findByNombre(String user);	
 
 
 

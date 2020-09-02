@@ -32,14 +32,14 @@ public class Usuario implements Serializable {
 	@Column(name = "pk_usuario")
 	private Integer id;
 
-	@Column(name = "nombre")
-	private String nombre;
+	@Column(name = "nombres")
+	private String nombres;
 
 	@Column(name = "apellido")
 	private String apellido;
 	
-	@Column(name = "user")
-	private String user;
+	@Column(name = "nombre")//de usuario
+	private String nombre;
 
 	@Column(name = "contrato")
 	private String contrato;
@@ -89,13 +89,7 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public String getApellido() {
 		return apellido;
@@ -133,7 +127,7 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return this.getNombre();
+		return this.getNombres();
 	}
 
 	public String getPassword() {
@@ -152,14 +146,24 @@ public class Usuario implements Serializable {
 		this.habilitado = habilitado;
 	}
 
-	
-	public String getUser() {
-		return user;
+	public String getNombres() {
+		return nombres;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	
+
 
 	
 	

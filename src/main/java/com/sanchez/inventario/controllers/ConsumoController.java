@@ -1,5 +1,5 @@
 package com.sanchez.inventario.controllers;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sanchez.inventario.models.dao.IConsumoMenu;
 import com.sanchez.inventario.models.entities.Consumo;
 import com.sanchez.inventario.models.entities.ConsumoMenu;
 import com.sanchez.inventario.models.entities.Menu;
 import com.sanchez.inventario.models.entities.Usuario;
+import com.sanchez.inventario.models.services.IConsumoMenuServices;
 import com.sanchez.inventario.models.services.IConsumoService;
 import com.sanchez.inventario.models.services.IMenuService;
 import com.sanchez.inventario.models.services.IUsuarioService;
@@ -37,15 +42,14 @@ public class ConsumoController {
 	private IUsuarioService srvUsuario;
 	@Autowired 
 	private IMenuService srvMenu;
-
 	
-	//Cada método en el controlador gestiona una petición al backend
-	//a traves de una URL (puede ser -> 1. Escrita en el navegador
-	//2. Puede sr Hyperlink, 3. Puede ser un action de un Form)
-	
+	@Autowired
+	private IConsumoMenuServices srvConsumoMenu;
+		
 	@GetMapping(value="/create") //https://localhost:8080/alumno/create
 	public String create(Model model) {
 		Consumo consumo = new Consumo();
+		consumo.setMenus(new ArrayList<ConsumoMenu>());
 		model.addAttribute("title", "Registro de nuevo Consumo");
 		model.addAttribute("consumo", consumo); //similar al ViewBag
 		List<Usuario> usuarios=srvUsuario.findAll();
@@ -67,12 +71,18 @@ public class ConsumoController {
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Consumo consumo = srConsumo.findById(id);
+		
 		model.addAttribute("consumo", consumo);
 		model.addAttribute("title", "Actualizando el registro de " + consumo);
 		List<Usuario> usuarios=srvUsuario.findAll();
 		model.addAttribute("usuarios", usuarios);
-		List<Menu> menus=srvMenu.findAll();
-		model.addAttribute("menus", menus);
+		
+List<ConsumoMenu> consumoMenus=consumo.getMenus();
+model.addAttribute("consumo_menu", consumoMenus);
+
+
+		
+		
 		return "consumo/form";
 	}
 	
@@ -92,8 +102,48 @@ public class ConsumoController {
 	
 	
 	@PostMapping(value="/save") 
-	public String save(Consumo consumo, Model model) {
-		srConsumo.save(consumo);
+	public String save(@Validated Consumo consumo, BindingResult result, Model model,SessionStatus status, RedirectAttributes flash, HttpSession session) {
+		
+		try {
+					
+			String message = "Consumo agregado con exito";
+			String titulo = "Registro de un nuevo Consumo";
+			
+			if(consumo.getId() != null) {
+				message = "Consumo agregado con exito";
+				titulo = "Actualizando Consumo N°" + consumo.getId();
+			}
+			
+			if(result.hasErrors()) {
+				model.addAttribute("title",titulo);
+				model.addAttribute("error", "Error al agregar Consumo");
+				
+				List<Usuario> usuarios=srvUsuario.findAll();
+				model.addAttribute("usuarios", usuarios);
+				List<Menu> menus=srvMenu.findAll();
+				model.addAttribute("menus", menus);
+				return "consumo/form";
+			}
+			
+			Consumo consumoSession=(Consumo)session.getAttribute("consumo");
+			
+			for (int i = 0; i < consumoSession.getMenus().size()-1; i++) {
+				consumo.getMenus().add(consumoSession.getMenus().get(i));
+
+			}
+			
+			srConsumo.save(consumo);
+
+			status.setComplete();
+			flash.addFlashAttribute("success", message);
+
+			
+		} catch (Exception e) {
+			System.out.print(e);
+
+			flash.addFlashAttribute("success", e.getMessage());
+		}
+		
 		return "redirect:/consumo/list";
 	}
 	
@@ -116,10 +166,9 @@ public class ConsumoController {
 	@GetMapping(value = "/menues")
 	public String menues(Model model, HttpSession session) {
 		
-		
-		
 		Consumo consumo= (Consumo)session.getAttribute("consumo");
-		model.addAttribute("consumos_menu", consumo.getMenus());
+			model.addAttribute("consumos_menu", consumo.getMenus());
+		
 
 		model.addAttribute("title", "Listado de Menús en el Consumo");
 		return "consumo_menu/list";

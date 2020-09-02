@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +21,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity  
@@ -43,9 +46,9 @@ public class Consumo implements Serializable{
 	@Column(name="fecha")
 	private Calendar fecha;
 	
-	
-	@OneToMany(mappedBy = "consumo")
-	private List<ConsumoMenu> menus =new ArrayList<ConsumoMenu>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "consumo",fetch=FetchType.LAZY)
+	private List<ConsumoMenu> menus;
 	
 	@JoinColumn(name="fk_usuario", referencedColumnName="pk_usuario")
 	@ManyToOne
@@ -81,6 +84,9 @@ public class Consumo implements Serializable{
 
 
 	public List<ConsumoMenu> getMenus() {
+		if (menus==null) {
+			menus=new ArrayList<ConsumoMenu>();
+		}
 		return menus;
 	}
 

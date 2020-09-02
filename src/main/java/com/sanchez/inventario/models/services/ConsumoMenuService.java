@@ -37,5 +37,11 @@ public class ConsumoMenuService implements IConsumoMenuServices {
 		
 	}
 
+	@Override
+	public List<ConsumoMenu> findByConsumo(Integer id) {
+
+		return (List<ConsumoMenu>) dao.findByConsumoid(id);
+	}
+
 	
 }

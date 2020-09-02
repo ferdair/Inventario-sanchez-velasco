@@ -1,6 +1,7 @@
 package com.sanchez.inventario.models.services;
 
 import java.util.List;
+
 import com.sanchez.inventario.models.entities.ConsumoMenu;
 
 public interface IConsumoMenuServices {
@@ -10,5 +11,7 @@ public interface IConsumoMenuServices {
 	public ConsumoMenu findById(Integer id);
 	public void delete(Integer id);
 	public List<ConsumoMenu> findAll();
+	public List<ConsumoMenu> findByConsumo(Integer id);
+
 
 }
