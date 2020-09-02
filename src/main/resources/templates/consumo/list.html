@@ -30,7 +30,10 @@
 								th:href="@{/consumo/update/} + ${a.id}"><i class="fas fa-pen"></i>
 									&nbsp;Actualizar</a> <a class="btn btn-sm ml-2 btn-info"
 								th:href="@{/consumo/retrieve/} + ${a.id}"><i
-									class="fas fa-info"></i>&nbsp;Consultar</a></td>
+									class="fas fa-info"></i>&nbsp;Consultar</a><button th:onclick="|alertDeleteConsumo(${a.id});|"
+									class="btn btn-sm ml-2 btn-danger">
+									<i class="fas fa-trash-alt"></i>
+								</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -41,6 +44,7 @@
 </div>
   <!-- ======= Footer ======= -->
   <footer th:replace="layout :: frgFooter"></footer>
+	<script th:src="@{/assets/js/consumo/delete-consumo.js}"></script>
 
    
   

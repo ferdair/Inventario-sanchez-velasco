@@ -30,7 +30,10 @@
 									class="fas fa-pen"></i> &nbsp;Actualizar</a> <a
 								th:href="@{/producto/retrieve/}+${a.id}"
 								class="btn btn-sm ml-2 btn-info"><i
-									class="fas fa-info"></i> &nbsp;Consultar</a></td>
+									class="fas fa-info"></i> &nbsp;Consultar</a><button th:onclick="|alertDeleteProducto(${a.id});|"
+									class="btn btn-sm ml-2 btn-danger">
+									<i class="fas fa-trash-alt"></i>
+								</button></td>
 
 						</tr>
 					</tbody>
@@ -39,6 +42,7 @@
 		</main>
 	</div>
 	<footer th:replace="layout :: frgFooter"></footer>
+	<script th:src="@{/assets/js/producto/delete-producto.js}"></script>
 
 </body>
 

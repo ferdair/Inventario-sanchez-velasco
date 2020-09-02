@@ -21,14 +21,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="a : ${menu}">
+						<tr th:each="a : ${menus}">
 							<td th:text="${a.nombre}"></td>
 
 							<td><a class="btn btn-sm ml-2 btn-warning"
 								th:href="@{/menu/update/} + ${a.id}"><i class="fas fa-pen"></i>
 									&nbsp;Actualizar</a> <a class="btn btn-sm ml-2 btn-info"
 								th:href="@{/menu/retrieve/} + ${a.id}"><i
-									class="fas fa-info"></i>&nbsp;Consultar</a></td>
+									class="fas fa-info"></i>&nbsp;Consultar</a><button th:onclick="|alertDeleteMenu(${a.id});|"
+									class="btn btn-sm ml-2 btn-danger">
+									<i class="fas fa-trash-alt"></i>
+								</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -39,6 +42,7 @@
 	</div>
 
 	<footer th:replace="layout :: frgFooter"></footer>
+	<script th:src="@{/assets/js/menu/delete-menu.js}"></script>
 
 
 </body>

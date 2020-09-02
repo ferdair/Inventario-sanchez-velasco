@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sanchez.inventario.models.entities.Menu;
 import com.sanchez.inventario.models.entities.MenuProducto;
@@ -77,15 +80,50 @@ public class MenuController {
 	@GetMapping(value = "/list")
 	public String list(Model model) {
 		List<Menu> menus = srvMenu.findAll();
-		model.addAttribute("menu", menus);
+		model.addAttribute("menus", menus);
 		model.addAttribute("title", "Listado de Menús");
 		return "menu/list";
 	}
 
 	@PostMapping(value = "/save")
-	public String save(Menu menu, Model model) {
-		srvMenu.save(menu);
+	public String save(@Validated Menu menu, BindingResult result, Model model,SessionStatus status, RedirectAttributes flash, HttpSession session) {
+		
+		try {
+			String message = "Menú agregado con exito";
+			String titulo = "Registro de un nueva Gira";
+			
+			if(menu.getId() != null) {
+				message = "Menu actualizado con exito";
+				titulo = "Actualizando Menú N°" + menu.getId();
+			}
+			
+			if(result.hasErrors()) {
+				model.addAttribute("title",titulo);
+				model.addAttribute("error", "Error al agregar menú");
+				List<Producto> productos = srvProducto.findAll();
+				model.addAttribute("productos",productos);
+				return "menu/form";
+			}
+			
+			Menu menuSession=(Menu)session.getAttribute("menu");
+			for (int i = 0; i < menuSession.getProductos().size()-1; i++) {
+				menu.getProductos().add(menuSession.getProductos().get(i));
+				
+			}
+			
+			srvMenu.save(menu);
+			status.setComplete();
+			flash.addFlashAttribute("success", message);
+
+			return "redirect:/menu/list";
+			
+		} catch (Exception e) {
+			flash.addFlashAttribute("success", e.getMessage());
+			
+		}
+		
 		return "redirect:/menu/list";
+
 	}
 
 	@PostMapping(value = "/add", produces = "application/json")

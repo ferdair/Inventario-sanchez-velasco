@@ -4,7 +4,6 @@
 <body>
 	<form id="frmConsumoMenu" th:action="@{/consumo/add}"
 		th:object="${consumo_menu}" method="post">
-		<hr>
 		<h5>Menú</h5>
 
 <input list="dataMenu" class="form-control" id="nameinput"
@@ -13,7 +12,7 @@
 			<option th:each="u : ${menus}" th:value="${u.nombre}"
 				th:label="${u}">
 		</datalist>
-
+<hr>
 		<!-- <div class="col-sm-6 mb-3 mb-sm-0">
 			<h5>Menu</h5>
 			<select class="form-control" th:field=*{menu.id}>

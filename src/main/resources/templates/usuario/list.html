@@ -17,8 +17,9 @@
 							<th>Contrato</th>
 							<th>Email</th>
 
-							<th><a th:href="@{/usuario/create}" class="btn btn-sm ml-2 btn-success"
-									type="reset"><i class="fas fa-plus"></i> &nbsp;Nuevo</a></th>
+							<th><a th:href="@{/usuario/create}"
+								class="btn btn-sm ml-2 btn-success" type="reset"><i
+									class="fas fa-plus"></i> &nbsp;Nuevo</a></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -29,11 +30,16 @@
 							<td th:text="${a.email}"></td>
 
 
-							<td><a th:href="@{/usuario/update/}+${a.id}" class="btn btn-sm ml-2 btn-warning"
-									><i class="fas fa-pen"></i>
-									 &nbsp;Actualizar</a>
-									<a th:href="@{/usuario/retrieve/}+${a.id}" class="btn btn-sm ml-2 btn-info"
-									><i class="fas fa-info"></i> &nbsp;Consultar</a></td>
+							<td><a th:href="@{/usuario/update/}+${a.id}"
+								class="btn btn-sm ml-2 btn-warning"><i
+									class="fas fa-pen"></i> &nbsp;Actualizar</a> <a
+								th:href="@{/usuario/retrieve/}+${a.id}"
+								class="btn btn-sm ml-2 btn-info"><i
+									class="fas fa-info"></i> &nbsp;Consultar</a>
+								<button th:onclick="|alertDeleteUsuario(${a.id});|"
+									class="btn btn-sm ml-2 btn-danger">
+									<i class="fas fa-trash-alt"></i>
+								</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -41,7 +47,8 @@
 			</div>
 		</main>
 	</div>
-		<footer th:replace="layout :: frgFooter"></footer>
-	
+	<footer th:replace="layout :: frgFooter"></footer>
+	<script th:src="@{/assets/js/usuario/delete-usuario.js}"></script>
+
 </body>
 </html>

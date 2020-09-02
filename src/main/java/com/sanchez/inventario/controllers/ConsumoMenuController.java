@@ -45,18 +45,12 @@ public class ConsumoMenuController {
 		return "consumo_menu/form"; //la ubicación de la vista
 	}
 	
-	@GetMapping(value="/retrieve/{id}")
-	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
-		ConsumoMenu consumo = srvConsumoMenu.findById(id);
-		model.addAttribute("consumo_menu", consumo);				
-		return "consumo_menu/card";
-	}
-	
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
-		ConsumoMenu consumo = srvConsumoMenu.findById(id);
-		model.addAttribute("consumo_menu", consumo);
-		model.addAttribute("title", "Actualizando el registro de " + consumo);
+		ConsumoMenu consumomenu = srvConsumoMenu.findById(id);
+		model.addAttribute("title", "Actualizando el registro de " + consumomenu);
+		model.addAttribute("consumo_menu", consumomenu);
+
 		
 		List<Consumo> consumos=srConsumo.findAll();
 		model.addAttribute("consumos", consumos);
@@ -64,6 +58,15 @@ public class ConsumoMenuController {
 		model.addAttribute("menus", menus);
 		return "consumo_menu/form";
 	}
+	
+	@GetMapping(value="/retrieve/{id}")
+	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
+		ConsumoMenu consumo = srvConsumoMenu.findById(id);
+		model.addAttribute("consumo_menu", consumo);				
+		return "consumo_menu/card";
+	}
+	
+	
 	
 	@GetMapping(value="/delete/{id}")
 	public String delete(@PathVariable(value="id") Integer id, Model model) {

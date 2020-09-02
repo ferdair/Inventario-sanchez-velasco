@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sanchez.inventario.models.dao.IConsumo;
+import com.sanchez.inventario.models.dao.IConsumoMenu;
 import com.sanchez.inventario.models.entities.Consumo;
+import com.sanchez.inventario.models.entities.ConsumoMenu;
+import com.sanchez.inventario.models.entities.MenuProducto;
 
 
 @Service
@@ -16,10 +19,17 @@ public class ConsumoService implements IConsumoService{
 	@Autowired //Inyección de dependencia
 	private IConsumo dao;
 		
+	@Autowired
+	private IConsumoMenu daoConsumoMenu;
 	@Override
 	@Transactional
 	public void save(Consumo c) {
 		dao.save(c);		
+		for (ConsumoMenu cm : c.getMenus()) {
+			cm.setConsumo(c);
+			daoConsumoMenu.save(cm);
+
+		}
 	}
 
 	@Override

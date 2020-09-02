@@ -2,6 +2,8 @@ package com.sanchez.inventario.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sanchez.inventario.models.entities.Usuario;
@@ -71,21 +74,22 @@ public class UsuarioController {
 	}
 
 	@PostMapping(value = "/save")
-	public String save(@Validated Usuario usuario, BindingResult result, Model model, RedirectAttributes flash) {
+	public String save(@Validated Usuario usuario, BindingResult result, Model model, SessionStatus status, RedirectAttributes flash, HttpSession session) {
 		try {
 			
-			String message = "Usuario agregado con exito";
+			String message = "Usuario agregado con éxito";
 			String titulo = "Registro de un nuevo Usuario";
 			
 			if(usuario.getId()!= null) {
-				message = "Gira actualizada con exito";
-				titulo = "Actualizando Gira N°" + usuario.getId();
+				message = "Usuario actualizado con exito";
+				titulo = "Actualizando Usuario N°" + usuario.getId();
 			}
 			
 			
 			if (result.hasErrors()) {
-				model.addAttribute("title", "Registro de nuevo usuario");
-				model.addAttribute("usuario", usuario);
+				model.addAttribute("title", titulo);
+				model.addAttribute("error", "Error al agregar usuario");
+
 				return "usuario/form";
 			}
 			String pass = usuario.getPassword();
@@ -94,7 +98,11 @@ public class UsuarioController {
 
 			usuario.setHabilitado(true);
 			service.save(usuario);
-			flash.addFlashAttribute("success", "El usuario fue agregado con éxito.");
+			status.setComplete();
+
+			flash.addFlashAttribute("success", message);
+			return "redirect:/usuario/list";
+
 		} catch (Exception ex) {
 			flash.addFlashAttribute("error", "El usuario no pudo ser agregado.");
 		}
