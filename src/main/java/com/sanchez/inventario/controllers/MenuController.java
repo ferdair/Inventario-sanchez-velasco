@@ -106,10 +106,20 @@ public class MenuController {
 			}
 			
 			Menu menuSession=(Menu)session.getAttribute("menu");
-			for (int i = 0; i < menuSession.getProductos().size()-1; i++) {
-				menu.getProductos().add(menuSession.getProductos().get(i));
-				
-			}
+			/*
+			 * for (int i = 0; i < menuSession.getProductos().size()-1; i++) {
+			 * menu.getProductos().add(menuSession.getProductos().get(i));
+			 * 
+			 * }
+			 */
+			
+			System.out.print(menuSession.getConsumos());
+			 
+				/*
+				 * for(MenuProducto p : menuSession.getProductos()) {
+				 * menu.getProductos().add(p); }
+				 */
+			
 			
 			srvMenu.save(menu);
 			status.setComplete();
@@ -135,7 +145,6 @@ public class MenuController {
 			menuProducto.setProducto(producto);
 			Menu menu= (Menu)session.getAttribute("menu");
 			menu.getProductos().add(menuProducto);		
-			System.out.print(menu.getNombre());
 
 			
 			return menuProducto;

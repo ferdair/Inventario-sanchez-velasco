@@ -116,19 +116,15 @@ public class ConsumoController {
 			}
 
 			Consumo consumoSession = (Consumo) session.getAttribute("consumo");
-
-			for (int i = 0; i < consumoSession.getMenus().size() - 1; i++) {
-				consumo.getMenus().add(consumoSession.getMenus().get(i));
-
-			}
-
+			/*
+			 * for(ConsumoMenu p : consumoSession.getMenus()) { consumo.getMenus().add(p); }
+			 */
 			srConsumo.save(consumo);
 
 			status.setComplete();
 			flash.addFlashAttribute("success", message);
 
 		} catch (Exception e) {
-			System.out.print(e);
 
 			flash.addFlashAttribute("success", e.getMessage());
 		}

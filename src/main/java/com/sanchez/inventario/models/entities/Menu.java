@@ -1,6 +1,7 @@
 package com.sanchez.inventario.models.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -72,6 +73,8 @@ public class Menu implements Serializable{
 
 
 	public List<MenuProducto> getProductos() {
+		if (productos==null)
+			productos= new ArrayList<MenuProducto>();
 		return productos;
 	}
 
@@ -80,6 +83,8 @@ public class Menu implements Serializable{
 	}
 
 	public List<ConsumoMenu> getConsumos() {
+		if (consumos==null)
+			consumos=new ArrayList<ConsumoMenu>();
 		return consumos;
 	}
 
