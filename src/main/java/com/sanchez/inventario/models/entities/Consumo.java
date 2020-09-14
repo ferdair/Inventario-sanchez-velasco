@@ -113,7 +113,23 @@ public class Consumo implements Serializable{
 		return this.fechaNac()+"-"+this.getUsuario();
 	}
 	
+public String contar() {
+	List<Producto> listProductos = new ArrayList<Producto>();
+
 	
+	for (int i = 0; i < menus.size()-1; i++) {
+		
+		for (int j = 0; j < menus.get(i).getMenu().getProductos().size()-1; j++) {
+			
+			listProductos.add(menus.get(i).getMenu().getProductos().get(j).getProducto());
+			
+		}
+		
+	}
+	String aString=listProductos.get(0).getNombre();
+	
+	return aString;
+}
 	
 	
 
