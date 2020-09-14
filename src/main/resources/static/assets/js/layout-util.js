@@ -1,4 +1,4 @@
-var developURL = "http://localhost:8080/";
+var developURL = "https://inventario-sanchez-velasco.herokuapp.com/";
 
 function objectifyForm(formArray) {
 	var returnArray = {};
